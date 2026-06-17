@@ -5,18 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How Many Mondays Left?</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="blob blob1"></div>
-    <div class="blob blob2"></div>
-    <div class="blob blob3"></div>
 
     <main>
         <div class="card">
@@ -26,24 +18,24 @@
                     calendar_month
                 </span>
 
-                <h1>How Many Mondays Left?</h1>
+                <h1>How many Mondays<br>do you have left?</h1>
 
                 <p class="subtitle">
-                    Enter your age and discover how many Mondays you may have left.
+                    Based on the average human lifespan,<br>discover how many Mondays remain.
                 </p>
 
                 <div class="input-group">
-                    <input id="age" type="number" min="1" max="120" placeholder=" ">
+                    <input id="age" type="number" placeholder=" ">
                     <label>Your age</label>
                 </div>
 
                 <button id="calculate">
-                    Calculate
+                    Reveal My Mondays
                 </button>
             </div>
 
             <div id="result-view" class="hidden fade-view">
-                <h2 id="count">--</h2>
+                <h2 id="count">0</h2>
                 <span class="label">Mondays Left</span>
                 <p id="message"></p>
 
