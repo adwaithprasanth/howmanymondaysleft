@@ -11,6 +11,14 @@ const messageDisplay = document.getElementById("message");
 const shareBtn = document.getElementById("share-btn");
 const backBtn = document.getElementById("back-btn");
 
+const buttonPhrases = [
+    "Reveal My Mondays",
+    "Count My Mondays",
+    "See What's Left",
+    "Show My Timeline",
+    "Uncover My Time"
+];
+
 // Number Animation Function (Apple style smooth easing)
 function animateValue(obj, start, end, duration) {
     let startTimestamp = null;
