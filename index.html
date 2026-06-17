@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>How Many Mondays Left?</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@300;400;500;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Material Icons -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div class="blob blob3"></div>
+
+<main>
+
+    <div class="card">
+
+        <span class="material-symbols-rounded hero-icon">
+            calendar_month
+        </span>
+
+        <h1>How Many Mondays Left?</h1>
+
+        <p class="subtitle">
+            Enter your age and discover how many Mondays you may have left.
+        </p>
+
+        <div class="input-group">
+
+            <input
+                id="age"
+                type="number"
+                min="1"
+                max="120"
+                placeholder=" ">
+
+            <label>Your age</label>
+
+        </div>
+
+        <button id="calculate">
+            Calculate
+        </button>
+
+        <section class="result hidden">
+
+            <h2 id="count">
+                --
+            </h2>
+
+            <span class="label">
+                Mondays Left
+            </span>
+
+            <p id="message">
+            </p>
+
+        </section>
+
+    </div>
+
+</main>
+
+<script src="script.js"></script>
+
+</body>
+</html>

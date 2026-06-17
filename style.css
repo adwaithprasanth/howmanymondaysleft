@@ -1,0 +1,387 @@
+:root {
+    --primary: #6750A4;
+    --primary-hover: #5B43A2;
+    --surface: rgba(255,255,255,.78);
+    --background: #F5F4F8;
+    --text: #1D1B20;
+    --secondary: #625B71;
+    --outline: #D6D2DB;
+    --shadow: 0 25px 60px rgba(0,0,0,.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Roboto Flex", sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: var(--text);
+    background: linear-gradient(135deg, #F8F6FD, #EEF4FF, #FFF7FB);
+    animation: bgShift 16s ease infinite;
+}
+
+@keyframes bgShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ======================
+BACKGROUND BLOBS
+======================*/
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(95px);
+    opacity: .42;
+    pointer-events: none;
+}
+
+.blob1 {
+    width: 360px;
+    height: 360px;
+    background: #C6B3FF;
+    left: -120px;
+    top: -120px;
+    animation: blobOne 22s ease-in-out infinite;
+}
+
+.blob2 {
+    width: 300px;
+    height: 300px;
+    background: #8DD8FF;
+    right: -100px;
+    bottom: -100px;
+    animation: blobTwo 18s ease-in-out infinite;
+}
+
+.blob3 {
+    width: 250px;
+    height: 250px;
+    background: #FFD1E7;
+    left: 42%;
+    bottom: 5%;
+    animation: blobThree 25s ease-in-out infinite;
+}
+
+@keyframes blobOne {
+    0%, 100% { transform: translate(0,0); }
+    50% { transform: translate(50px,60px); }
+}
+
+@keyframes blobTwo {
+    0%, 100% { transform: translate(0,0); }
+    50% { transform: translate(-40px,-60px); }
+}
+
+@keyframes blobThree {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-70px); }
+}
+
+/* ======================
+LAYOUT
+======================*/
+main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 24px;
+}
+
+/* ======================
+CARD (Upgraded width, padding, blur, glow & animation)
+======================*/
+.card {
+    /* Made larger */
+    width: min(470px, 92%);
+    padding: 48px;
+    border-radius: 32px;
+    background: var(--surface);
+    
+    /* Increased blur and saturation */
+    backdrop-filter: blur(40px) saturate(180%);
+    border: 1px solid rgba(255,255,255,.4);
+    box-shadow: var(--shadow);
+    text-align: center;
+    
+    /* Made it breathe */
+    animation: 
+        appear .8s ease,
+        floatCard 8s ease-in-out infinite;
+        
+    transition: box-shadow .35s;
+
+    /* Necessary for the mouse glow effect */
+    position: relative;
+    overflow: hidden; 
+}
+
+/* Mouse Glow Pseudo-element */
+.card::before {
+    content: "";
+    position: absolute;
+    top: var(--mouse-y, 50%);
+    left: var(--mouse-x, 50%);
+    transform: translate(-50%, -50%);
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(187, 134, 252, 0.15) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: -1; /* Keeps the glow behind text/inputs */
+}
+
+.card:hover::before {
+    opacity: 1; /* Glow appears on hover */
+}
+
+.card:hover {
+    box-shadow: 0 35px 70px rgba(0,0,0,.12);
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(40px) scale(.97); }
+    to { opacity: 1; transform: none; }
+}
+
+@keyframes floatCard {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+/* ======================
+ICON (Upgraded size & variation)
+======================*/
+.hero-icon {
+    font-size: 72px;
+    color: var(--primary);
+    animation: floatIcon 5s ease-in-out infinite;
+    font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 48;
+}
+
+@keyframes floatIcon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* ======================
+TYPOGRAPHY
+======================*/
+h1 {
+    margin-top: 16px;
+    font-size: 2.15rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.subtitle {
+    margin-top: 14px;
+    color: var(--secondary);
+    line-height: 1.7;
+    font-size: .98rem;
+}
+
+/* ======================
+INPUT
+======================*/
+.input-group {
+    position: relative;
+    margin-top: 38px;
+}
+
+input {
+    width: 100%;
+    padding: 20px 18px;
+    border-radius: 18px;
+    border: 2px solid transparent;
+    outline: none;
+    font-size: 1rem;
+    background: white;
+    transition: .3s;
+}
+
+input:hover {
+    border-color: #DDD6F5;
+}
+
+input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 5px rgba(103,80,164,.10);
+}
+
+label {
+    position: absolute;
+    left: 18px;
+    top: 20px;
+    color: #8C8797;
+    transition: .25s;
+    pointer-events: none;
+}
+
+input:focus + label,
+input:not(:placeholder-shown) + label {
+    top: -11px;
+    left: 15px;
+    background: white;
+    padding: 0 8px;
+    color: var(--primary);
+    font-size: .82rem;
+    font-weight: 600;
+}
+
+/* ======================
+BUTTON (Upgraded shadows & transforms)
+======================*/
+button {
+    margin-top: 32px;
+    width: 100%;
+    padding: 18px;
+    border: none;
+    border-radius: 18px;
+    background: var(--primary);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(103,80,164,.35);
+    transition: all .25s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+button:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 18px 35px rgba(103,80,164,.35);
+}
+
+button:active {
+    transform: scale(.98);
+}
+
+/* ======================
+RESULT
+======================*/
+.result {
+    margin-top: 38px;
+    animation: fadeUp .6s ease;
+}
+
+#count {
+    font-size: 4.3rem;
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: -2px;
+}
+
+.label {
+    margin-top: 8px;
+    color: var(--secondary);
+    font-size: 1.05rem;
+}
+
+#message {
+    margin-top: 20px;
+    color: var(--secondary);
+    line-height: 1.7;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: none; }
+}
+
+.hidden {
+    display: none;
+}
+
+/* ======================
+RESPONSIVE
+======================*/
+@media(max-width:500px) {
+    body {
+        overflow: auto;
+        padding: 20px;
+    }
+    .card {
+        padding: 32px 24px;
+        border-radius: 28px;
+    }
+    h1 {
+        font-size: 1.8rem;
+    }
+    #count {
+        font-size: 3.4rem;
+    }
+}
+
+/* ======================
+DARK MODE (Correctly Closed & Structured)
+======================*/
+@media(prefers-color-scheme: dark) {
+    :root {
+        --background: #111318;
+        --text: #F4EFF4;
+        --secondary: #CAC4D0;
+        /* Slightly darkened surface so the glass effect looks good in dark mode */
+        --surface: rgba(30, 30, 35, 0.78); 
+    }
+
+    body {
+        background: linear-gradient(135deg, #0F1115, #16171D, #1B1A22);
+    }
+
+    input {
+        background: #2A2B31;
+        color: white;
+    }
+
+    input:focus {
+        box-shadow: 0 0 0 5px rgba(187, 134, 252, .12);
+    }
+
+    /* Fixed floating label background for dark mode */
+    input:focus + label,
+    input:not(:placeholder-shown) + label {
+        background: #2A2B31;
+        color: rgba(187, 134, 252, 1);
+    }
+    
+    /* Make dark mode border more visible */
+    .card {
+        border: 1px solid rgba(255,255,255,.08);
+    }
+} /* <-- DARK MODE IS NOW SAFELY CLOSED HERE */
+/* ======================
+LOADING STATE ADDITIONS
+======================*/
+button:disabled {
+    opacity: 0.75;
+    cursor: not-allowed;
+    transform: none !important; /* Prevents the hover jump while loading */
+    box-shadow: 0 6px 18px rgba(103,80,164,.35) !important;
+}
+
+.spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
