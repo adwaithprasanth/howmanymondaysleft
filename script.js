@@ -11,6 +11,7 @@ const messageDisplay = document.getElementById("message");
 const shareBtn = document.getElementById("share-btn");
 const backBtn = document.getElementById("back-btn");
 
+// 1. Thematic Button Randomizer
 const buttonPhrases = [
     "Reveal My Mondays",
     "Count My Mondays",
@@ -19,7 +20,12 @@ const buttonPhrases = [
     "Uncover My Time"
 ];
 
-// Number Animation Function (Apple style smooth easing)
+const getRandomPhrase = () => buttonPhrases[Math.floor(Math.random() * buttonPhrases.length)];
+
+let currentPhrase = getRandomPhrase();
+button.innerHTML = currentPhrase;
+
+// 2. Number Animation Function (Apple style smooth easing)
 function animateValue(obj, start, end, duration) {
     let startTimestamp = null;
     const step = (timestamp) => {
@@ -39,7 +45,7 @@ function animateValue(obj, start, end, duration) {
     window.requestAnimationFrame(step);
 }
 
-// Age-Based Quotes & Easter Eggs Logic
+// 3. Age-Based Quotes & Easter Eggs Logic
 const getQuoteForAge = (age) => {
     // EASTER EGGS
     if (age < 0) return "Time traveler detected. 🛸";
@@ -54,8 +60,8 @@ const getQuoteForAge = (age) => {
     if (age >= 65 && age < 100) return "Time is your greatest asset. Spend it on experiences, loved ones, and the simple joys of life.";
 };
 
+// 4. Main Calculation Logic
 button.addEventListener("click", () => {
-    // Note: Removed validation blocking < 1 to allow easter eggs
     const ageValue = ageInput.value.trim();
     
     if (ageValue === "") {
@@ -70,21 +76,23 @@ button.addEventListener("click", () => {
     button.innerHTML = `<span class="material-symbols-rounded spin">progress_activity</span> Revealing...`;
 
     setTimeout(() => {
+        // Restore button state and get a NEW random phrase
         button.disabled = false;
-        button.innerHTML = "Reveal My Mondays";
+        currentPhrase = getRandomPhrase();
+        button.innerHTML = currentPhrase;
 
         const lifeExpectancy = 80;
         let mondaysLeft = 0;
         
         // Calculate logic (handling easter egg math)
         if (age < 0) {
-            mondaysLeft = 0; // Don't calculate for time travelers
+            mondaysLeft = 0; 
         } else if (age === 0) {
             mondaysLeft = Math.floor(lifeExpectancy * 52.14);
         } else if (age < lifeExpectancy) {
             mondaysLeft = Math.floor((lifeExpectancy - age) * 52.14);
         } else {
-            mondaysLeft = 0; // 80+ shouldn't have negative mondays
+            mondaysLeft = 0; 
         }
 
         messageDisplay.innerText = getQuoteForAge(age);
@@ -94,20 +102,20 @@ button.addEventListener("click", () => {
         resultView.classList.remove("hidden");
 
         // Start the number animation
-        countDisplay.innerHTML = "0"; // reset visually first
-        animateValue(countDisplay, 0, mondaysLeft, 1500); // 1.5 second animation
+        countDisplay.innerHTML = "0"; 
+        animateValue(countDisplay, 0, mondaysLeft, 1500); 
 
-    }, 800); // Slightly faster load time for a snappier app feel
+    }, 800); 
 });
 
-// Back Button Logic
+// 5. Back Button Logic
 backBtn.addEventListener("click", () => {
     ageInput.value = "";
     resultView.classList.add("hidden");
     inputView.classList.remove("hidden");
 });
 
-// Share Logic
+// 6. Share Logic
 shareBtn.addEventListener("click", async () => {
     const mondays = countDisplay.innerText;
     const shareText = `I have exactly ${mondays} Mondays left to make an impact. How many do you have? ⏳`;
@@ -129,4 +137,16 @@ shareBtn.addEventListener("click", async () => {
             shareBtn.innerHTML = originalText;
         }, 2000);
     }
+});
+
+// 7. Mouse Glow Logic
+const card = document.querySelector('.card');
+
+card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
 });
